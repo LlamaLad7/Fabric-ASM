@@ -48,51 +48,51 @@ sourceSets {
 			srcDir 'resources'
 		}
 	}
-	example {
-		compileClasspath += main.compileClasspath + main.output
-		annotationProcessorPath = main.annotationProcessorPath
-		java {
-			srcDir 'example/src'
-		}
-		resources {
-			srcDir 'example/resources'
-			exclude "access-transformations.txt"
-		}
-	}
+//	example {
+//		compileClasspath += main.compileClasspath + main.output
+//		annotationProcessorPath = main.annotationProcessorPath
+//		java {
+//			srcDir 'example/src'
+//		}
+//		resources {
+//			srcDir 'example/resources'
+//			exclude "access-transformations.txt"
+//		}
+//	}
 }
 
 jar {
 	AT.include = false
 }
 
-task exampleJar(type: RemappingJar, dependsOn: exampleClasses) {
-	classifier = "example"
-	from sourceSets.example.output
-}
+//task exampleJar(type: RemappingJar, dependsOn: exampleClasses) {
+//	classifier = "example"
+//	from sourceSets.example.output
+//}
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = "sources"
 	from sourceSets.main.allSource
 }
 
-task exampleSourcesJar(type: RemappingJar, dependsOn: exampleClasses) {
-	classifier = "example-sources"
-	from sourceSets.example.allSource
-}
+//task exampleSourcesJar(type: RemappingJar, dependsOn: exampleClasses) {
+//	classifier = "example-sources"
+//	from sourceSets.example.allSource
+//}
 
-build.dependsOn exampleJar, exampleSourcesJar
+//build.dependsOn exampleJar, exampleSourcesJar
 
 artifacts {
 	archives(remapJar) {
 		builtBy remapJar
 	}
-	archives(exampleJar) {
-		builtBy exampleJar
-	}
+//	archives(exampleJar) {
+//		builtBy exampleJar
+//	}
 	archives(sourcesJar) {
 		builtBy sourcesJar
 	}
-	archives(exampleSourcesJar) {
-		builtBy exampleSourcesJar
-	}
+//	archives(exampleSourcesJar) {
+//		builtBy exampleSourcesJar
+//	}
 }
